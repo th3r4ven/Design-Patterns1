@@ -10,7 +10,7 @@ class Calculador_de_descontos(object):
 
 
 if __name__ == '__main__':
-    from orcamento import Orcamento, Item
+    from buget import Orcamento, Item
 
     orcamento = Orcamento()
     orcamento.adiciona_itens(Item('Item 01', 100))
