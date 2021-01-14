@@ -16,9 +16,13 @@ if __name__ == '__main__':
     calculador = Calculador_de_impostos()
 
     orcamento = Orcamento()
-    orcamento.adiciona_itens(Item('Item 01', 100))
-    orcamento.adiciona_itens(Item('Item 02', 50))
-    orcamento.adiciona_itens(Item('Item 03', 400))
+    orcamento.adiciona_itens(Item('Item 01', 50))
+    orcamento.adiciona_itens(Item('Item 02', 200))
+    orcamento.adiciona_itens(Item('Item 03', 250))
 
+    print(orcamento.valor)
     calculador.realiza_calculo(orcamento, ISS())
     calculador.realiza_calculo(orcamento, ICMS())
+    print("=====")
+    calculador.realiza_calculo(orcamento, ICPP())
+    calculador.realiza_calculo(orcamento, IKCV())
