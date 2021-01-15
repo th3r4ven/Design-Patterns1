@@ -1,4 +1,5 @@
 from datetime import date
+from observer import *
 
 
 class Item(object):
@@ -18,7 +19,7 @@ class Item(object):
 
 class Invoice(object):
 
-    def __init__(self, company_name, cnpj, items, emission_date, details):
+    def __init__(self, company_name, cnpj, items, emission_date, details, observer):
         self.__company_name = company_name
         self.__cnpj = cnpj
         self.__emission_date = emission_date
@@ -27,6 +28,11 @@ class Invoice(object):
             raise Exception('Details can\'t have more than 20 characters')
         self.__details = details
         self.__items = items
+
+        for obs in observer:
+            obs(self)
+
+
 
     @property
     def company_name(self):
@@ -61,5 +67,13 @@ if __name__ == '__main__':
                         Invoice_creator()
                         .with_company_name('FHSA Limitada')
                         .with_cnpj('012345678901234')
-                        .with_items(items).builder()
+                        .with_items(items)
+                        .with_observer(
+                            [
+                                print_out,
+                                send_by_mail,
+                                save_on_db
+                            ]
+                        )
+                        .builder()
                        )
